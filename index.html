@@ -1,4 +1,4 @@
-<!-- v1.46 | Last updated: 2026-08-05 -->
+<!-- v1.47 | Last updated: 2026-08-05 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -293,7 +293,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 <div class="app">
   <header class="top">
     <h1>Eric's Scrabble 2/3 Letter Word Trainer</h1>
-    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.46</span></div>
+    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.47</span></div>
   </header>
 
   <nav class="tabs">
@@ -1432,7 +1432,7 @@ function renderLookupHistory(){
   lookupHistory.forEach(h=>{
     const row = document.createElement('div');
     row.className = 'hist-item';
-    row.innerHTML = `<span>${h.word} <span style="color:var(--muted);font-size:11px;">(${h.general? 'general dict':h.dict})</span></span><span style="color:${h.isValid?'#8fe0ae':'#f0a08c'};font-weight:700;">${h.isValid?'VALID':'NOT VALID'}</span>`;
+    row.innerHTML = `<span>${h.word} <span style="color:var(--muted);font-size:11px;">(${h.general? 'ENABLE':h.dict})</span></span><span style="color:${h.isValid?'#8fe0ae':'#f0a08c'};font-weight:700;">${h.isValid?'VALID':'NOT VALID'}</span>`;
     list.appendChild(row);
   });
 }
