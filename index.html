@@ -1,4 +1,4 @@
-<!-- v1.42 | Last updated: 2026-07-26 -->
+<!-- v1.44 | Last updated: 2026-08-05 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,24 +175,19 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 .played-section{margin-top:18px;}
 .played-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .played-header h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0;}
-.played-list{max-height:460px;overflow-y:auto;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:16px;align-items:flex-start;}
+.played-list{max-height:300px;overflow-y:auto;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:10px;align-items:flex-start;}
 .played-col{flex:1;min-width:0;display:flex;flex-direction:column;}
-.played-row{display:flex;justify-content:flex-start;align-items:center;gap:6px;padding:2px 2px;font-size:11.5px;line-height:1.3;border-bottom:1px solid rgba(255,255,255,0.05);}
-.played-row .pw{font-family:Georgia,serif;font-weight:700;letter-spacing:0.5px;min-width:24px;}
+.played-row{display:flex;justify-content:space-between;align-items:center;gap:4px;padding:2px 3px;font-size:11px;line-height:1.3;border-bottom:1px solid rgba(255,255,255,0.05);border-radius:3px;}
+.played-row .pw{font-family:Georgia,serif;font-weight:700;letter-spacing:0.5px;}
 .played-row .pw.pw-valid{color:#8fe0ae;}
 .played-row .pw.pw-invalid{color:#f0a08c;}
-.played-row .pw-badges{display:flex;gap:4px;align-items:center;}
-.pw-badge{font-size:8.5px;padding:1px 5px;border-radius:20px;font-weight:700;min-width:30px;text-align:center;}
-.pw-badge.valid{background:rgba(63,143,95,0.25);color:#8fe0ae;}
-.pw-badge.invalid{background:rgba(192,83,62,0.25);color:#f0a08c;}
-.pw-icon{font-size:10px;font-weight:900;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
+.played-row-missed{background:rgba(192,83,62,0.16);border:1.5px solid var(--bad);border-bottom:1.5px solid var(--bad);padding:1px 2px;}
+.pw-icon{font-size:9px;font-weight:900;width:13px;height:13px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
 .pw-icon.correct{color:#fff;background:var(--good);}
 .pw-icon.wrong{color:#fff;background:var(--bad);}
 
-.played-col-header{display:flex;align-items:center;gap:6px;padding:0 2px 5px;font-size:9.5px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:2px;}
-.played-col-header .ph-word{min-width:24px;}
-.played-col-header .ph-guess{min-width:30px;text-align:center;}
-.played-col-header .ph-icon{width:14px;flex:none;}
+.played-col-header{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:0 3px 5px;font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:2px;}
+.played-col-header .ph-icon{width:13px;flex:none;}
 .played-empty{text-align:center;color:var(--muted);font-size:12px;padding:14px 0;width:100%;}
 
 /* Summary */
@@ -261,6 +256,12 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 .lookup-result .verdict.yes-text{color:#8fe0ae;}
 .lookup-result .verdict.no-text{color:#f0a08c;}
 .lookup-result .dictinfo{font-size:12px;color:var(--muted);margin-top:6px;}
+.official-check-btn{
+  display:block;width:100%;margin-top:12px;padding:10px;border-radius:10px;
+  background:rgba(58,107,122,0.25);border:1.5px solid rgba(58,107,122,0.6);
+  color:#9fd4e0;font-size:12.5px;font-weight:700;cursor:pointer;
+}
+.official-check-btn:active{opacity:0.8;}
 .lookup-history{margin-top:16px;}
 .lookup-history .hist-item{display:flex;justify-content:space-between;padding:8px 12px;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);}
 
@@ -292,7 +293,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 <div class="app">
   <header class="top">
     <h1>Eric's Scrabble 2/3 Letter Word Trainer</h1>
-    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.42</span></div>
+    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.44</span></div>
   </header>
 
   <nav class="tabs">
@@ -389,6 +390,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
           <div class="played-col" id="playedCol1"></div>
           <div class="played-col" id="playedCol2"></div>
           <div class="played-col" id="playedCol3"></div>
+          <div class="played-col" id="playedCol4"></div>
         </div>
       </div>
 
@@ -420,6 +422,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
         <div class="played-col" id="summaryCol1"></div>
         <div class="played-col" id="summaryCol2"></div>
         <div class="played-col" id="summaryCol3"></div>
+        <div class="played-col" id="summaryCol4"></div>
       </div>
 
       <div id="missedWordsSection">
@@ -468,6 +471,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
       <div class="word" id="lookupWord"></div>
       <div class="verdict" id="lookupVerdict"></div>
       <div class="dictinfo" id="lookupDictInfo"></div>
+      <button class="official-check-btn" id="officialCheckBtn" style="display:none;">Not sure? Double-check on Collins' official list →</button>
     </div>
 
     <div class="card lookup-history" id="lookupHistoryCard" style="display:none;">
@@ -810,6 +814,7 @@ function startRound(size, dict, lenMode, presetWords, fullCoverage, infinite){
   document.getElementById('playedCol1').innerHTML = '';
   document.getElementById('playedCol2').innerHTML = '';
   document.getElementById('playedCol3').innerHTML = '';
+  document.getElementById('playedCol4').innerHTML = '';
   document.getElementById('playedCount').textContent = '0';
   document.getElementById('progressWrap').style.display = infinite ? 'none' : 'block';
   document.getElementById('livesCell').style.display = infinite ? 'block' : 'none';
@@ -979,7 +984,7 @@ function answer(userSaysValid){
 
   // Auto-advance quickly; tapping the banner skips the wait. Nothing else on
   // screen moves, hides, or reflows — only the banner content changes.
-  game.advanceTimer = setTimeout(advanceNow, correct ? 300 : 550);
+  game.advanceTimer = setTimeout(advanceNow, correct ? 600 : 1650);
 }
 
 function logPlayedWord(word, isValid, wasCorrect, userGuess){
@@ -989,7 +994,7 @@ function logPlayedWord(word, isValid, wasCorrect, userGuess){
 }
 
 function renderPlayedColumns(){
-  renderColumnLog(game.log, ['playedCol1','playedCol2','playedCol3'], 'playedEmptyMsg');
+  renderColumnLog(game.log, ['playedCol1','playedCol2','playedCol3','playedCol4'], 'playedEmptyMsg');
 }
 
 function computeRowsPerColumn(colEl, headerHtml, sampleRowHtml){
@@ -1028,15 +1033,11 @@ function renderColumnLog(log, colIds, emptyMsgId){
   const newestFirst = [...log].reverse();
   const headerHtml = `<div class="played-col-header">
     <span class="ph-word">Word</span>
-    <span class="ph-guess">Guess</span>
     <span class="ph-icon"></span>
   </div>`;
   const sampleRowHtml = `<div class="played-row">
       <span class="pw pw-valid">XX</span>
-      <span class="pw-badges">
-        <span class="pw-badge valid">Word</span>
-        <span class="pw-icon correct">${SVG_CHECK}</span>
-      </span>
+      <span class="pw-icon correct">${SVG_CHECK}</span>
     </div>`;
 
   // Measure actual rendered heights so a column fills the real available
@@ -1048,13 +1049,9 @@ function renderColumnLog(log, colIds, emptyMsgId){
   newestFirst.forEach((e, i)=>{
     const block = Math.floor(i / rowsPerCol);
     const target = buckets[block % cols.length];
-    const guessedValid = (e.userGuess !== undefined) ? e.userGuess : (e.wasCorrect ? e.isValid : !e.isValid);
-    target.push(`<div class="played-row">
+    target.push(`<div class="played-row ${e.wasCorrect?'':'played-row-missed'}">
       <span class="pw ${e.isValid?'pw-valid':'pw-invalid'}">${e.word}</span>
-      <span class="pw-badges">
-        <span class="pw-badge ${guessedValid?'valid':'invalid'}">${guessedValid?'Word':'Not'}</span>
-        <span class="pw-icon ${e.wasCorrect?'correct':'wrong'}">${e.wasCorrect?SVG_CHECK:SVG_X}</span>
-      </span>
+      <span class="pw-icon ${e.wasCorrect?'correct':'wrong'}">${e.wasCorrect?SVG_CHECK:SVG_X}</span>
     </div>`);
   });
   cols.forEach((c, i) => c.innerHTML = buckets[i].join(''));
@@ -1142,7 +1139,7 @@ function finishRound(){
     });
   }
   showScreen('screen-summary');
-  renderColumnLog(game.log, ['summaryCol1','summaryCol2','summaryCol3'], null);
+  renderColumnLog(game.log, ['summaryCol1','summaryCol2','summaryCol3','summaryCol4'], null);
 }
 
 document.getElementById('startBtn').addEventListener('click', ()=>{
@@ -1386,6 +1383,7 @@ async function doLookup(){
     verdict.innerHTML = isValid ? SVG_CHECK+' Valid word' : SVG_X+' Not a valid word';
     verdict.className = 'verdict ' + (isValid?'yes-text':'no-text');
     dictInfo.textContent = `Checked against ${dict}`;
+    document.getElementById('officialCheckBtn').style.display = isValid ? 'none' : 'block';
     recordLookup(raw, isValid, dict);
     return;
   }
@@ -1395,6 +1393,7 @@ async function doLookup(){
   verdict.textContent = 'Checking…';
   verdict.className = 'verdict';
   dictInfo.textContent = '';
+  document.getElementById('officialCheckBtn').style.display = 'none';
   try{
     const words = await loadEnableWordList();
     const isValid = words.has(raw);
@@ -1402,6 +1401,10 @@ async function doLookup(){
     verdict.innerHTML = isValid ? SVG_CHECK+' Valid word (ENABLE word list)' : SVG_X+' Not found in ENABLE word list';
     verdict.className = 'verdict ' + (isValid?'yes-text':'no-text');
     dictInfo.textContent = `${raw.length}-letter words are checked against ENABLE, a word-game dictionary (also used by Words With Friends) — a close but not byte-identical match to the current licensed ${dict} tournament list.`;
+    // ENABLE hasn't been updated since 1997, so it skews toward false
+    // negatives (real words it doesn't know about) far more than false
+    // positives — worth offering a quick path to the real official list.
+    document.getElementById('officialCheckBtn').style.display = isValid ? 'none' : 'block';
     recordLookup(raw, isValid, dict, true);
   }catch(e){
     resEl.className = 'lookup-result show';
@@ -1431,6 +1434,23 @@ function renderLookupHistory(){
   });
 }
 document.getElementById('lookupBtn').addEventListener('click', doLookup);
+
+document.getElementById('officialCheckBtn').addEventListener('click', ()=>{
+  const word = document.getElementById('lookupWord').textContent;
+  const btn = document.getElementById('officialCheckBtn');
+  const finish = ()=>{
+    window.open('https://scrabble.collinsdictionary.com/check/', '_blank');
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(word).then(()=>{
+      btn.textContent = 'Copied "'+word+'" — opening Collins…';
+      setTimeout(()=>{ btn.textContent = "Not sure? Double-check on Collins' official list →"; }, 2500);
+      finish();
+    }).catch(finish);
+  } else {
+    finish();
+  }
+});
 document.getElementById('lookupInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doLookup(); });
 document.getElementById('lookupInput').addEventListener('input', e=>{ e.target.value = e.target.value.toUpperCase(); });
 
