@@ -1,4 +1,4 @@
-<!-- v1.47 | Last updated: 2026-08-05 -->
+<!-- v1.48 | Last updated: 2026-08-05 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,6 +169,18 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
   border:1.5px solid rgba(192,83,62,0.6);color:#f0a08c;box-shadow:0 4px 16px rgba(0,0,0,0.35);
 }
 
+.summary-footer{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(14px + env(safe-area-inset-bottom));
+  width:calc(100% - 32px);max-width:448px;z-index:40;
+  display:flex;gap:10px;
+}
+.summary-footer .big-btn{
+  flex:1;margin-top:0;padding:14px 8px;font-size:14px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.35);
+}
+#screen-summary{padding-bottom:calc(70px + env(safe-area-inset-bottom));}
+
 #resetMissedBtn.confirming{background:var(--bad);color:#fff;border-color:var(--bad);font-weight:700;}
 .quit-btn:active{transform:translateY(2px);}
 
@@ -293,7 +305,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 <div class="app">
   <header class="top">
     <h1>Eric's Scrabble 2/3 Letter Word Trainer</h1>
-    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.47</span></div>
+    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.48</span></div>
   </header>
 
   <nav class="tabs">
@@ -432,8 +444,10 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
         <div class="card miss-list" id="missList"></div>
       </div>
 
-      <button class="big-btn" id="practiceMissedBtn">Practice These Again</button>
-      <button class="big-btn secondary" id="newRoundBtn">New Round</button>
+      <div class="summary-footer">
+        <button class="big-btn" id="practiceMissedBtn">Practice Again</button>
+        <button class="big-btn secondary" id="newRoundBtn">New Round</button>
+      </div>
     </div>
   </div>
 
