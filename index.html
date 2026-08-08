@@ -1,4 +1,4 @@
-<!-- v1.53 | Last updated: 2026-08-06 -->
+<!-- v1.54 | Last updated: 2026-08-06 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +39,7 @@ h1,h2,h3{font-family:Georgia,'Times New Roman',serif;margin:0;}
 header.top{padding:calc(12px + env(safe-area-inset-top)) 0 8px;text-align:center;}
 header.top h1{font-size:16px;letter-spacing:0.2px;color:var(--tile);line-height:1.2;margin:0;}
 header.top .sub{font-size:12px;color:var(--muted);margin-top:2px;}
-.header-version{font-size:12px;color:var(--muted);opacity:0.55;margin-left:6px;}
+.header-version{font-size:14px;font-weight:700;color:var(--accent);opacity:0.85;margin-left:6px;}
 
 nav.tabs{display:flex;gap:6px;margin:10px 0 16px;background:rgba(0,0,0,0.2);border-radius:12px;padding:4px;}
 nav.tabs button{
@@ -305,7 +305,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 <div class="app">
   <header class="top">
     <h1>Eric's Scrabble 2/3 Letter Word Trainer</h1>
-    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.53</span></div>
+    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.54</span></div>
   </header>
 
   <nav class="tabs">
@@ -595,8 +595,15 @@ const SVG_PARTY = '<svg viewBox="0 0 24 24" width="1em" height="1em" style="vert
    as non-personalized (npa), so no ATT tracking prompt.
 ===================================================== */
 const ADMOB_APP_ID = 'ca-app-pub-4761405979397591~5581692795';
-const BANNER_AD_UNIT_ID = 'ca-app-pub-4761405979397591/9123985003';
-const INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-4761405979397591/6920227562';
+// TEMPORARY DEBUG SWAP: Google's official test ad unit IDs — these always
+// show a real ad (labeled "Test mode") regardless of AdMob account approval
+// status. If these work but the real IDs below (commented out) don't, that
+// confirms the wiring is fine and it's purely an account-approval timing
+// issue. Revert to the real IDs once confirmed.
+const BANNER_AD_UNIT_ID = 'ca-app-pub-3940256099942544/2934735716'; // TEST ID
+const INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-3940256099942544/4411468910'; // TEST ID
+// const BANNER_AD_UNIT_ID = 'ca-app-pub-4761405979397591/9123985003'; // REAL
+// const INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-4761405979397591/6920227562'; // REAL
 const INTERSTITIAL_FREQUENCY = 3; // show an interstitial every Nth round start
 
 let adsInitialized = false;
