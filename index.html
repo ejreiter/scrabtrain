@@ -1,4 +1,4 @@
-<!-- v1.54 | Last updated: 2026-08-06 -->
+<!-- v1.56 | Last updated: 2026-08-06 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -305,7 +305,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 <div class="app">
   <header class="top">
     <h1>Eric's Scrabble 2/3 Letter Word Trainer</h1>
-    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.54</span></div>
+    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.56</span></div>
   </header>
 
   <nav class="tabs">
@@ -595,15 +595,8 @@ const SVG_PARTY = '<svg viewBox="0 0 24 24" width="1em" height="1em" style="vert
    as non-personalized (npa), so no ATT tracking prompt.
 ===================================================== */
 const ADMOB_APP_ID = 'ca-app-pub-4761405979397591~5581692795';
-// TEMPORARY DEBUG SWAP: Google's official test ad unit IDs — these always
-// show a real ad (labeled "Test mode") regardless of AdMob account approval
-// status. If these work but the real IDs below (commented out) don't, that
-// confirms the wiring is fine and it's purely an account-approval timing
-// issue. Revert to the real IDs once confirmed.
-const BANNER_AD_UNIT_ID = 'ca-app-pub-3940256099942544/2934735716'; // TEST ID
-const INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-3940256099942544/4411468910'; // TEST ID
-// const BANNER_AD_UNIT_ID = 'ca-app-pub-4761405979397591/9123985003'; // REAL
-// const INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-4761405979397591/6920227562'; // REAL
+const BANNER_AD_UNIT_ID = 'ca-app-pub-4761405979397591/9123985003';
+const INTERSTITIAL_AD_UNIT_ID = 'ca-app-pub-4761405979397591/6920227562';
 const INTERSTITIAL_FREQUENCY = 3; // show an interstitial every Nth round start
 
 let adsInitialized = false;
@@ -622,6 +615,14 @@ async function initAds(){
     await AdMob.initialize({ initializeForTesting: false });
     adsInitialized = true;
     prepareInterstitial();
+    // The setup screen is marked active directly in the static HTML, so on
+    // first load it never goes through showScreen() — check for that case
+    // explicitly, or the banner would only ever appear after navigating
+    // away and back.
+    const setupScreen = document.getElementById('screen-setup');
+    if(setupScreen && setupScreen.classList.contains('active')){
+      showSetupBanner();
+    }
   }catch(e){
     console.warn('AdMob init failed', e);
   }
