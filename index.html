@@ -1,4 +1,4 @@
-<!-- v1.56 | Last updated: 2026-08-06 -->
+<!-- v1.57 | Last updated: 2026-11-05 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +7,9 @@
 <meta name="theme-color" content="#2b4b3c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Eric's Scrabble Trainer">
-<meta name="description" content="Practice 2 and 3 letter Scrabble words: NWL and SOWPODS dictionaries, word lookup, and anagram tools.">
-<title>Eric's Scrabble 2/3 Letter Word Trainer</title>
+<meta name="apple-mobile-web-app-title" content="2&amp;3 Letter Word Trainer">
+<meta name="description" content="Practice 2 and 3 letter words: NWL and SOWPODS dictionaries, word lookup, and anagram tools.">
+<title>2&amp;3 Letter Word Trainer</title>
 <style>
 :root{
   --board:#2b4b3c;
@@ -304,8 +304,8 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 <body>
 <div class="app">
   <header class="top">
-    <h1>Eric's Scrabble 2/3 Letter Word Trainer</h1>
-    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.56</span></div>
+    <h1>2&amp;3 Letter Word Trainer</h1>
+    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.57</span></div>
   </header>
 
   <nav class="tabs">
@@ -1307,7 +1307,7 @@ function buildScoreCardCanvas(){
   ctx.fillStyle = '#f0e6d2';
   ctx.font = '700 34px Georgia, serif';
   ctx.textAlign = 'center';
-  ctx.fillText("Eric's Scrabble Trainer", W/2, 80);
+  ctx.fillText("2&3 Letter Word Trainer", W/2, 80);
 
   ctx.fillStyle = '#8ba493';
   ctx.font = '600 20px -apple-system, sans-serif';
@@ -1382,22 +1382,22 @@ function shareScoreCard(){
   // synchronously within the user gesture, or it silently rejects.
   const dataUrl = canvas.toDataURL('image/png');
   const blob = dataURLToBlob(dataUrl);
-  const shareText = `I scored ${document.getElementById('summaryPct').textContent} (${document.getElementById('summaryHeroLabel').textContent}) on Eric's Scrabble Trainer! Play at ${GAME_URL}`;
-  const file = new File([blob], 'scrabble-score.png', {type:'image/png'});
+  const shareText = `I scored ${document.getElementById('summaryPct').textContent} (${document.getElementById('summaryHeroLabel').textContent}) on 2&3 Letter Word Trainer! Play at ${GAME_URL}`;
+  const file = new File([blob], 'word-trainer-score.png', {type:'image/png'});
 
   if(navigator.canShare && navigator.canShare({files:[file]})){
-    navigator.share({files:[file], title:'My Scrabble Score', text: shareText}).catch(()=>{ /* user cancelled — no action needed */ });
+    navigator.share({files:[file], title:'My Word Trainer Score', text: shareText}).catch(()=>{ /* user cancelled — no action needed */ });
     return;
   }
   if(navigator.share){
-    navigator.share({title:'My Scrabble Score', text: shareText, url: GAME_URL}).catch(()=>{});
+    navigator.share({title:'My Word Trainer Score', text: shareText, url: GAME_URL}).catch(()=>{});
     return;
   }
   // Fallback for desktop or unsupported browsers: download the image instead
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'scrabble-score.png';
+  link.download = 'word-trainer-score.png';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -1444,7 +1444,7 @@ document.getElementById('wlSearch').addEventListener('input', renderWordList);
        American Benchmark Lexicon) — a public-domain word
        list built for word games (the same list Zynga used
        as the official Words With Friends dictionary). It's
-       a much closer match to Scrabble-style validity than a
+       a much closer match to tournament-style word validity than a
        general English dictionary, but still not a byte-for-
        byte copy of the real Collins/SOWPODS list (we don't
        have a Collins license), so it's labeled honestly as
