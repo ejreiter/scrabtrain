@@ -1,4 +1,4 @@
-<!-- v1.57 | Last updated: 2026-11-05 -->
+<!-- v1.58 | Last updated: 2026-11-05 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="2&amp;3 Letter Word Trainer">
-<meta name="description" content="Practice 2 and 3 letter words: NWL and SOWPODS dictionaries, word lookup, and anagram tools.">
+<meta name="description" content="Practice 2 and 3 letter words with the NWL word list, plus word lookup and anagram tools.">
 <title>2&amp;3 Letter Word Trainer</title>
 <style>
 :root{
@@ -254,7 +254,6 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
   font-family:Georgia,serif;font-weight:700;font-size:15px;letter-spacing:0.5px;cursor:pointer;
 }
 .wl-count{font-size:12px;color:var(--muted);margin-bottom:10px;}
-.wl-sowpods-only{background:#e4d7f5;}
 
 /* Lookup */
 .lookup-input-row{display:flex;gap:8px;}
@@ -305,7 +304,7 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 <div class="app">
   <header class="top">
     <h1>2&amp;3 Letter Word Trainer</h1>
-    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.57</span></div>
+    <div class="sub">2s &amp; 3s word validity practice <span class="header-version" id="headerVersion">v1.58</span></div>
   </header>
 
   <nav class="tabs">
@@ -321,13 +320,6 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
 
     <div class="screen active" id="screen-setup">
       <div class="card">
-        <div class="opt-group">
-          <label class="group-label">Dictionary</label>
-          <div class="opt-row">
-            <div class="opt-btn selected" data-group="dict" data-val="NWL">NWL<small>North America</small></div>
-            <div class="opt-btn" data-group="dict" data-val="SOWPODS">SOWPODS<small>International</small></div>
-          </div>
-        </div>
         <div class="opt-group">
           <label class="group-label">Word length</label>
           <div class="opt-row">
@@ -455,10 +447,6 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
   <div class="screen" id="tab-wordlist">
     <div class="card">
       <div class="opt-row">
-        <div class="opt-btn selected" data-group="wldict" data-val="NWL">NWL</div>
-        <div class="opt-btn" data-group="wldict" data-val="SOWPODS">SOWPODS</div>
-      </div>
-      <div class="opt-row">
         <div class="opt-btn selected" data-group="wllen" data-val="2">2-letter</div>
         <div class="opt-btn" data-group="wllen" data-val="3">3-letter</div>
       </div>
@@ -471,23 +459,17 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
   <!-- LOOKUP TAB -->
   <div class="screen" id="tab-lookup">
     <div class="card">
-      <label class="group-label">Dictionary</label>
-      <div class="opt-row">
-        <div class="opt-btn selected" data-group="lkdict" data-val="NWL">NWL</div>
-        <div class="opt-btn" data-group="lkdict" data-val="SOWPODS">SOWPODS</div>
-      </div>
       <div class="lookup-input-row">
         <input type="text" class="search-box" id="lookupInput" placeholder="Type any word…" maxlength="20" autocapitalize="characters">
       </div>
       <button class="big-btn" id="lookupBtn" style="margin-top:0;">Check Word</button>
-      <p class="small-note">NWL words of any length are checked against the real, official NASPA Word List (NWL2023), licensed directly from NASPA. SOWPODS 2–3 letter words are checked exactly against this app's compiled list; SOWPODS 4+ letter words are checked against ENABLE, a public-domain word-game dictionary — a close but not byte-identical match to the real Collins/SOWPODS list (we don't have a Collins license yet).</p>
+      <p class="small-note">Words of any length are checked against the real, official NASPA Word List (NWL2023), licensed directly from NASPA.</p>
     </div>
 
     <div class="lookup-result" id="lookupResult">
       <div class="word" id="lookupWord"></div>
       <div class="verdict" id="lookupVerdict"></div>
       <div class="dictinfo" id="lookupDictInfo"></div>
-      <button class="official-check-btn" id="officialCheckBtn" style="display:none;">Not sure? Double-check on Collins' official list →</button>
     </div>
 
     <div class="card lookup-history" id="lookupHistoryCard" style="display:none;">
@@ -501,10 +483,6 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
     <div class="card">
       <label class="group-label">Enter 2–3 letters</label>
       <input type="text" class="search-box" id="anagramInput" placeholder="e.g. AIT" maxlength="3" autocapitalize="characters">
-      <div class="opt-row" style="margin-top:10px;">
-        <div class="opt-btn selected" data-group="agdict" data-val="NWL">NWL</div>
-        <div class="opt-btn" data-group="agdict" data-val="SOWPODS">SOWPODS</div>
-      </div>
       <button class="big-btn" id="anagramBtn">Find Words</button>
       <p class="small-note">Shows every valid 2 and 3-letter word that can be made from the letters you enter (using each letter at most as many times as you typed it).</p>
     </div>
@@ -514,11 +492,6 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
   <!-- MISSED WORDS TAB -->
   <div class="screen" id="tab-missed">
     <div class="card">
-      <label class="group-label">Dictionary (for validity check)</label>
-      <div class="opt-row">
-        <div class="opt-btn selected" data-group="msdict" data-val="NWL">NWL</div>
-        <div class="opt-btn" data-group="msdict" data-val="SOWPODS">SOWPODS</div>
-      </div>
       <button class="big-btn" id="practiceMissedFromTabBtn">Practice My Missed Words</button>
       <button class="big-btn secondary" id="resetMissedBtn" style="margin-top:8px;">Reset Miss Tally</button>
       <p class="small-note">A running local record of every word you've ever gotten wrong. Valid words on the left, invalid on the right, bar length shows how often you've missed each. Stored on this device only.</p>
@@ -538,29 +511,19 @@ nav.tabs button.active{background:var(--tile);color:var(--board-dark);}
    WORD DATA
    NWL2/NWL3: derived from the real NWL2023 word list,
    licensed directly from NASPA (Small Scale Application
-   Developer license). SOWPODS_ONLY_2/3: additional words
-   valid in Collins/SOWPODS beyond NWL — community-compiled
-   for study purposes, not independently licensed. For
-   official tournament rulings, verify with your club's
-   official word checker.
+   Developer license). For official tournament rulings,
+   verify with your club's official word checker.
 ===================================================== */
 const NWL2 = ["AA","AB","AD","AE","AG","AH","AI","AL","AM","AN","AR","AS","AT","AW","AX","AY","BA","BE","BI","BO","BY","DA","DE","DO","ED","EF","EH","EL","EM","EN","ER","ES","ET","EW","EX","FA","FE","GI","GO","HA","HE","HI","HM","HO","ID","IF","IN","IS","IT","JO","KA","KI","LA","LI","LO","MA","ME","MI","MM","MO","MU","MY","NA","NE","NO","NU","OD","OE","OF","OH","OI","OK","OM","ON","OP","OR","OS","OW","OX","OY","PA","PE","PI","PO","QI","RE","SH","SI","SO","TA","TE","TI","TO","UH","UM","UN","UP","US","UT","WE","WO","XI","XU","YA","YE","YO","ZA"];
 
-const SOWPODS_ONLY_2 = ["CH","DI","EA","EE","FY","GU","IO","JA","KO","KY","NY","OB","OO","OU","ST","UG","UR","YU","ZE","ZO"];
-
 const NWL3 = ["AAH","AAL","AAS","ABA","ABS","ABY","ACE","ACK","ACT","ADD","ADO","ADS","ADZ","AFF","AFT","AGA","AGE","AGO","AGS","AHA","AHI","AHS","AID","AIL","AIM","AIN","AIR","AIS","AIT","AJI","ALA","ALB","ALE","ALL","ALP","ALS","ALT","AMA","AMI","AMP","AMU","ANA","AND","ANE","ANI","ANT","ANY","APE","APO","APP","APT","ARB","ARC","ARE","ARF","ARK","ARM","ARO","ARS","ART","ASH","ASK","ASP","ASS","ATE","ATS","ATT","AUK","AVA","AVE","AVO","AWA","AWE","AWL","AWN","AXE","AYE","AYS","AZO","BAA","BAD","BAE","BAG","BAH","BAL","BAM","BAN","BAP","BAR","BAS","BAT","BAY","BED","BEE","BEG","BEL","BEN","BES","BET","BEY","BIB","BID","BIG","BIN","BIO","BIS","BIT","BIZ","BOA","BOB","BOD","BOG","BOO","BOP","BOS","BOT","BOW","BOX","BOY","BRA","BRO","BRR","BUB","BUD","BUG","BUM","BUN","BUR","BUS","BUT","BUY","BYE","BYS","CAB","CAD","CAF","CAL","CAM","CAN","CAP","CAR","CAT","CAW","CAY","CEE","CEL","CEP","CHI","CIG","CIS","COB","COD","COG","COL","CON","COO","COP","COR","COS","COT","COW","COX","COY","COZ","CRU","CRY","CUB","CUD","CUE","CUM","CUP","CUR","CUT","CUZ","CWM","DAB","DAD","DAG","DAH","DAK","DAL","DAM","DAN","DAP","DAS","DAW","DAY","DEB","DEE","DEF","DEL","DEN","DEP","DEV","DEW","DEX","DEY","DIB","DID","DIE","DIF","DIG","DIM","DIN","DIP","DIS","DIT","DOC","DOE","DOG","DOH","DOL","DOM","DON","DOR","DOS","DOT","DOW","DOX","DRY","DUB","DUD","DUE","DUG","DUH","DUI","DUM","DUN","DUO","DUP","DYE","EAR","EAT","EAU","EBB","ECO","ECU","EDH","EDS","EEK","EEL","EEW","EFF","EFS","EFT","EGG","EGO","EKE","ELD","ELF","ELK","ELL","ELM","ELS","EME","EMO","EMS","EMU","END","ENG","ENS","EON","ERA","ERE","ERG","ERN","ERR","ERS","ESS","EST","ETA","ETH","EVE","EWE","EYE","FAB","FAD","FAG","FAH","FAM","FAN","FAR","FAS","FAT","FAV","FAX","FAY","FED","FEE","FEH","FEM","FEN","FER","FES","FET","FEU","FEW","FEY","FEZ","FIB","FID","FIE","FIG","FIL","FIN","FIR","FIT","FIX","FIZ","FLU","FLY","FOB","FOE","FOG","FOH","FON","FOO","FOP","FOR","FOU","FOX","FOY","FRO","FRY","FUB","FUD","FUG","FUN","FUR","GAB","GAD","GAE","GAG","GAL","GAM","GAN","GAP","GAR","GAS","GAT","GAY","GED","GEE","GEL","GEM","GEN","GET","GEY","GHI","GIB","GID","GIE","GIF","GIG","GIN","GIP","GIS","GIT","GNU","GOA","GOB","GOD","GOO","GOR","GOS","GOT","GOX","GOY","GRR","GUL","GUM","GUN","GUT","GUV","GUY","GYM","GYP","HAD","HAE","HAG","HAH","HAJ","HAM","HAO","HAP","HAS","HAT","HAW","HAY","HEH","HEM","HEN","HEP","HER","HES","HET","HEW","HEX","HEY","HIC","HID","HIE","HIM","HIN","HIP","HIS","HIT","HMM","HOB","HOD","HOE","HOG","HOM","HON","HOO","HOP","HOS","HOT","HOW","HOY","HUB","HUE","HUG","HUH","HUM","HUN","HUP","HUT","HYP","ICE","ICH","ICK","ICY","IDS","IFF","IFS","IGG","ILK","ILL","IMP","INK","INN","INS","ION","IRE","IRK","ISM","ITS","IVY","JAB","JAG","JAM","JAR","JAW","JAY","JEE","JET","JEU","JIB","JIG","JIN","JOB","JOE","JOG","JOT","JOW","JOY","JUG","JUN","JUS","JUT","KAB","KAE","KAF","KAS","KAT","KAY","KEA","KEF","KEG","KEN","KEP","KEX","KEY","KHI","KID","KIF","KIN","KIP","KIR","KIS","KIT","KOA","KOB","KOI","KOP","KOR","KOS","KUE","KYE","LAB","LAC","LAD","LAG","LAH","LAM","LAP","LAR","LAS","LAT","LAV","LAW","LAX","LAY","LEA","LED","LEE","LEG","LEI","LEK","LET","LEU","LEV","LEX","LEY","LIB","LID","LIE","LIN","LIP","LIS","LIT","LOB","LOC","LOG","LOO","LOP","LOR","LOT","LOW","LOX","LUD","LUG","LUM","LUN","LUV","LUX","LYE","MAC","MAD","MAE","MAG","MAM","MAN","MAP","MAR","MAS","MAT","MAW","MAX","MAY","MED","MEG","MEH","MEL","MEM","MEN","MES","MET","MEW","MHO","MIB","MIC","MID","MIG","MIL","MIM","MIR","MIS","MIX","MMM","MOA","MOB","MOC","MOD","MOG","MOI","MOL","MOM","MON","MOO","MOP","MOR","MOS","MOT","MOW","MUD","MUG","MUM","MUN","MUS","MUT","MUX","MYC","NAB","NAE","NAG","NAH","NAM","NAN","NAP","NAV","NAW","NAY","NEB","NEE","NEG","NET","NEW","NIB","NIL","NIM","NIP","NIT","NIX","NOB","NOD","NOG","NOH","NOM","NOO","NOR","NOS","NOT","NOW","NTH","NUB","NUG","NUN","NUS","NUT","OAF","OAK","OAR","OAT","OBA","OBE","OBI","OCA","OCH","ODA","ODD","ODE","ODS","OES","OFF","OFT","OHM","OHO","OHS","OIK","OIL","OKA","OKE","OLD","OLE","OMA","OMS","ONE","ONO","ONS","OOF","OOH","OOT","OPA","OPE","OPS","OPT","ORA","ORB","ORC","ORE","ORG","ORS","ORT","OSE","OUD","OUR","OUT","OVA","OWE","OWL","OWN","OWT","OXO","OXY","PAC","PAD","PAH","PAK","PAL","PAM","PAN","PAP","PAR","PAS","PAT","PAW","PAX","PAY","PEA","PEC","PED","PEE","PEG","PEH","PEN","PEP","PER","PES","PET","PEW","PHI","PHO","PHT","PIA","PIC","PIE","PIG","PIN","PIP","PIS","PIT","PIU","PIX","PLY","POD","POH","POI","POL","POM","POO","POP","POS","POT","POW","POX","PRO","PRY","PSI","PST","PUB","PUD","PUG","PUL","PUN","PUP","PUR","PUS","PUT","PWN","PYA","PYE","PYX","QAT","QIS","QUA","RAD","RAG","RAH","RAI","RAJ","RAM","RAN","RAP","RAS","RAT","RAW","RAX","RAY","REB","REC","RED","REE","REF","REG","REI","REM","REP","RES","RET","REV","REX","REZ","RHO","RIA","RIB","RID","RIF","RIG","RIM","RIN","RIP","ROB","ROC","ROD","ROE","ROM","ROO","ROT","ROW","RUB","RUE","RUG","RUM","RUN","RUT","RYA","RYE","RYU","SAB","SAC","SAD","SAE","SAG","SAL","SAN","SAP","SAT","SAU","SAW","SAX","SAY","SEA","SEC","SEE","SEG","SEI","SEL","SEN","SER","SET","SEV","SEW","SEX","SEZ","SHA","SHE","SHH","SHO","SHY","SIB","SIC","SIG","SIM","SIN","SIP","SIR","SIS","SIT","SIX","SKA","SKI","SKY","SLY","SOB","SOC","SOD","SOH","SOL","SOM","SON","SOP","SOS","SOT","SOU","SOW","SOX","SOY","SPA","SPY","SRI","STY","SUB","SUE","SUK","SUM","SUN","SUP","SUQ","SUS","SYN","TAB","TAD","TAE","TAG","TAJ","TAM","TAN","TAO","TAP","TAR","TAS","TAT","TAU","TAV","TAW","TAX","TEA","TEC","TED","TEE","TEG","TEL","TEN","TES","TET","TEW","THE","THO","THY","TIC","TIE","TIL","TIN","TIP","TIS","TIT","TIX","TIZ","TOD","TOE","TOG","TOM","TON","TOO","TOP","TOR","TOT","TOW","TOY","TRY","TSK","TUB","TUG","TUI","TUM","TUN","TUP","TUT","TUX","TWA","TWO","TYE","UDO","UGH","UKE","ULU","UMM","UMP","UMS","UNI","UNS","UPO","UPS","URB","URD","URN","URP","USE","UTA","UTE","UTS","VAC","VAN","VAR","VAS","VAT","VAU","VAV","VAW","VAX","VEE","VEG","VET","VEX","VIA","VID","VIE","VIG","VIM","VIN","VIS","VOE","VOG","VOW","VOX","VUG","VUM","WAB","WAD","WAE","WAG","WAN","WAP","WAR","WAS","WAT","WAW","WAX","WAY","WEB","WED","WEE","WEN","WET","WHA","WHO","WHY","WIG","WIN","WIS","WIT","WIZ","WOE","WOK","WON","WOO","WOS","WOT","WOW","WRY","WUD","WUZ","WYE","WYN","XED","XIS","YAG","YAH","YAK","YAM","YAP","YAR","YAS","YAW","YAY","YEA","YEH","YEN","YEP","YER","YES","YET","YEW","YEZ","YIN","YIP","YOB","YOD","YOK","YOM","YON","YOU","YOW","YUK","YUM","YUP","ZAG","ZAP","ZAS","ZAX","ZED","ZEE","ZEK","ZEN","ZEP","ZIG","ZIN","ZIP","ZIT","ZOA","ZOO","ZUZ","ZZZ"];
-
-const SOWPODS_ONLY_3 = ["ABO","AIA","BOR","FAE","GEO","GUB","HAN","HOC","HOI","ITA","KOW","KYU","LEP","LES","LEW","NAT","OBS","ONY","OOM","OYE","PUY","SAV","TEX","WEX","WOG","WOP","WUS","YID"];
 
 // Build final sets
 function buildDict(){
   const nwl2 = new Set(NWL2);
   const nwl3 = new Set(NWL3);
-  const sow2 = new Set([...NWL2, ...SOWPODS_ONLY_2]);
-  const sow3 = new Set([...NWL3, ...SOWPODS_ONLY_3]);
   return {
-    NWL: { 2: nwl2, 3: nwl3 },
-    SOWPODS: { 2: sow2, 3: sow3 }
+    NWL: { 2: nwl2, 3: nwl3 }
   };
 }
 const DICT = buildDict();
@@ -827,6 +790,7 @@ wireOptGroup(document, 'msdict');
 document.querySelectorAll('[data-group="msdict"]').forEach(b=>b.addEventListener('click', renderMissedWordsTab));
 
 function getSelected(groupName){
+  if(groupName.endsWith('dict')) return 'NWL'; // NWL is the only word list
   return document.querySelector(`[data-group="${groupName}"].selected`).dataset.val;
 }
 
@@ -1362,8 +1326,8 @@ function buildScoreCardCanvas(){
 // Best guess at this app's live GitHub Pages URL, used in the share card/text
 // so whoever receives it has a way back to the game. Update this if the repo
 // name or username changes.
-const GAME_URL = 'https://scrabble.ericr.us/';
-const GAME_URL_DISPLAY = 'scrabble.ericr.us';
+const GAME_URL = 'https://wordtrainer.ericr.us/';
+const GAME_URL_DISPLAY = 'wordtrainer.ericr.us';
 
 function dataURLToBlob(dataUrl){
   const [header, base64] = dataUrl.split(',');
@@ -1435,43 +1399,18 @@ document.getElementById('wlSearch').addEventListener('input', renderWordList);
 /* =====================================================
    LOOKUP TOOL
    2-3 letter words: checked exactly against our compiled
-   NWL/SOWPODS lists.
-   4+ letter words:
-     - NWL: checked against the real, official NWL2023 word
-       list, licensed directly from NASPA (Small Scale
-       Application Developer license).
-     - SOWPODS: checked against ENABLE (Enhanced North
-       American Benchmark Lexicon) — a public-domain word
-       list built for word games (the same list Zynga used
-       as the official Words With Friends dictionary). It's
-       a much closer match to tournament-style word validity than a
-       general English dictionary, but still not a byte-for-
-       byte copy of the real Collins/SOWPODS list (we don't
-       have a Collins license), so it's labeled honestly as
-       ENABLE rather than "official."
+   NWL lists. Longer words: checked against the real, official
+   NWL2023 word list, licensed directly from NASPA (Small Scale
+   Application Developer license).
 ===================================================== */
 let lookupHistory = [];
-let enableWordSet = null;
-let enableLoadPromise = null;
 let nwlFullWordSet = null;
 let nwlFullLoadPromise = null;
 
-function loadEnableWordList(){
-  if(enableWordSet) return Promise.resolve(enableWordSet);
-  if(enableLoadPromise) return enableLoadPromise;
-  enableLoadPromise = fetch('https://raw.githubusercontent.com/rressler/data_raw_courses/main/enable1_words.txt')
-    .then(res => res.text())
-    .then(text => {
-      enableWordSet = new Set(text.split('\n').map(w => w.trim().toUpperCase()).filter(Boolean));
-      return enableWordSet;
-    });
-  return enableLoadPromise;
-}
 
 // The real, official NASPA Word List (NWL2023) — licensed via NASPA's Small
 // Scale Application Developer program. Covers every word length, not just
-// 2-3 letters, so it's used for NWL-mode 4+ letter lookups too instead of
-// the ENABLE approximation.
+// 2-3 letters, so it's used for 4+ letter lookups too.
 function loadNWLFullWordList(){
   if(nwlFullWordSet) return Promise.resolve(nwlFullWordSet);
   if(nwlFullLoadPromise) return nwlFullLoadPromise;
@@ -1500,42 +1439,23 @@ async function doLookup(){
     verdict.innerHTML = isValid ? SVG_CHECK+' Valid word' : SVG_X+' Not a valid word';
     verdict.className = 'verdict ' + (isValid?'yes-text':'no-text');
     dictInfo.textContent = `Checked against ${dict}`;
-    document.getElementById('officialCheckBtn').style.display = isValid ? 'none' : 'block';
     recordLookup(raw, isValid, dict);
     return;
   }
 
-  // 4+ letters (or 1 letter): NWL uses the real licensed word list; SOWPODS
-  // still uses ENABLE as an honest approximation, since we don't have a
-  // Collins/CSW license (yet).
+  // 4+ letters (or 1 letter): checked against the real licensed word list.
   resEl.className = 'lookup-result show';
   verdict.textContent = 'Checking…';
   verdict.className = 'verdict';
   dictInfo.textContent = '';
-  document.getElementById('officialCheckBtn').style.display = 'none';
   try{
-    if(dict === 'NWL'){
-      const words = await loadNWLFullWordList();
-      const isValid = words.has(raw);
-      resEl.className = 'lookup-result show ' + (isValid?'yes':'no');
-      verdict.innerHTML = isValid ? SVG_CHECK+' Valid word (official NWL2023)' : SVG_X+' Not a valid word (official NWL2023)';
-      verdict.className = 'verdict ' + (isValid?'yes-text':'no-text');
-      dictInfo.textContent = `Checked against the real NASPA Word List (NWL2023) — licensed directly from NASPA, the same list used in official North American tournament play.`;
-      document.getElementById('officialCheckBtn').style.display = 'none';
-      recordLookup(raw, isValid, dict, false);
-    } else {
-      const words = await loadEnableWordList();
-      const isValid = words.has(raw);
-      resEl.className = 'lookup-result show ' + (isValid?'yes':'no');
-      verdict.innerHTML = isValid ? SVG_CHECK+' Valid word (ENABLE word list)' : SVG_X+' Not found in ENABLE word list';
-      verdict.className = 'verdict ' + (isValid?'yes-text':'no-text');
-      dictInfo.textContent = `${raw.length}-letter SOWPODS words are checked against ENABLE, a word-game dictionary (also used by Words With Friends) — a close but not byte-identical match to the current licensed Collins/SOWPODS list (we don't have a Collins license yet).`;
-      // ENABLE hasn't been updated since 1997, so it skews toward false
-      // negatives (real words it doesn't know about) far more than false
-      // positives — worth offering a quick path to the real official list.
-      document.getElementById('officialCheckBtn').style.display = isValid ? 'none' : 'block';
-      recordLookup(raw, isValid, dict, true);
-    }
+    const words = await loadNWLFullWordList();
+    const isValid = words.has(raw);
+    resEl.className = 'lookup-result show ' + (isValid?'yes':'no');
+    verdict.innerHTML = isValid ? SVG_CHECK+' Valid word (official NWL2023)' : SVG_X+' Not a valid word (official NWL2023)';
+    verdict.className = 'verdict ' + (isValid?'yes-text':'no-text');
+    dictInfo.textContent = `Checked against the real NASPA Word List (NWL2023) — licensed directly from NASPA, the same list used in official North American tournament play.`;
+    recordLookup(raw, isValid, dict, false);
   }catch(e){
     resEl.className = 'lookup-result show';
     verdict.textContent = "Couldn't load the word list";
@@ -1559,28 +1479,12 @@ function renderLookupHistory(){
   lookupHistory.forEach(h=>{
     const row = document.createElement('div');
     row.className = 'hist-item';
-    row.innerHTML = `<span>${h.word} <span style="color:var(--muted);font-size:11px;">(${h.general? 'ENABLE':h.dict})</span></span><span style="color:${h.isValid?'#8fe0ae':'#f0a08c'};font-weight:700;">${h.isValid?'VALID':'NOT VALID'}</span>`;
+    row.innerHTML = `<span>${h.word} <span style="color:var(--muted);font-size:11px;">(${h.dict})</span></span><span style="color:${h.isValid?'#8fe0ae':'#f0a08c'};font-weight:700;">${h.isValid?'VALID':'NOT VALID'}</span>`;
     list.appendChild(row);
   });
 }
 document.getElementById('lookupBtn').addEventListener('click', doLookup);
 
-document.getElementById('officialCheckBtn').addEventListener('click', ()=>{
-  const word = document.getElementById('lookupWord').textContent;
-  const btn = document.getElementById('officialCheckBtn');
-  const finish = ()=>{
-    window.open('https://scrabble.collinsdictionary.com/check/', '_blank');
-  };
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(word).then(()=>{
-      btn.textContent = 'Copied "'+word+'" — opening Collins…';
-      setTimeout(()=>{ btn.textContent = "Not sure? Double-check on Collins' official list →"; }, 2500);
-      finish();
-    }).catch(finish);
-  } else {
-    finish();
-  }
-});
 document.getElementById('lookupInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doLookup(); });
 document.getElementById('lookupInput').addEventListener('input', e=>{ e.target.value = e.target.value.toUpperCase(); });
 
