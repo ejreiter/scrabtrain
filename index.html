@@ -743,7 +743,7 @@ function getDecoys(dict, len){
    -device, not synced across phones/computers.
 ===================================================== */
 let progress = { rounds: 0, totalAccuracySum: 0, wordStats: {}, infiniteHighScores: {}, bestStreaks: {} }; // wordStats[word] = {wrong, right}; infiniteHighScores["DICT_LEN"] = best score; bestStreaks["DICT_LEN"] = best streak
-const STORAGE_KEY = 'scrabble_trainer_progress';
+const STORAGE_KEY = 'word_trainer_progress';
 
 function loadProgress(){
   try{
